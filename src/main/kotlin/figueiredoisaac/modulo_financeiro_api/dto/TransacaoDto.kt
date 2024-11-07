@@ -5,7 +5,9 @@ import figueiredoisaac.modulo_financeiro_api.model.FormaPagamento
 import figueiredoisaac.modulo_financeiro_api.model.Transacao
 import figueiredoisaac.modulo_financeiro_api.repository.CategoriaRepository
 import figueiredoisaac.modulo_financeiro_api.repository.FormaPagamentoRepository
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 
 class TransacaoDto(
     private val nomeTransacao: String,
@@ -15,8 +17,8 @@ class TransacaoDto(
     private val numeroParcelaAtual: Long,
     private val idFormaPagamento: Long,
     private val idCategoria: Long,
-    private val dataPrevista: LocalDateTime,
-    private val dataRealizada: LocalDateTime?,
+    private val dataPrevista: LocalDate,
+    private val dataRealizada: LocalDate,
     private val flagRecorrente: Boolean
 ) {
     fun toTransacao(formaPagamentoRepository: FormaPagamentoRepository, categoriaRepository: CategoriaRepository): Transacao {
@@ -36,8 +38,8 @@ class TransacaoDto(
             categoria = categoria,
             dataCriada = LocalDateTime.now(),
             dataAtualizada = LocalDateTime.now(),
-            dataPrevista = dataPrevista,
-            dataRealizada = dataRealizada,
+            dataPrevista = dataPrevista.atStartOfDay(),
+            dataRealizada = dataRealizada.atTime(LocalTime.now()),
             flagRecorrente = flagRecorrente
         )
     }
