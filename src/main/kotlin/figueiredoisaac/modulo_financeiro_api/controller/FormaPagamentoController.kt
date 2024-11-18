@@ -19,4 +19,14 @@ class FormaPagamentoController(private val formaPagamentoService: FormaPagamento
     fun obterFormasPagamento(): ResponseEntity<List<FormaPagamento>> {
         return formaPagamentoService.listarFormasPagamento()
     }
+
+    @DeleteMapping("/{idFormaPagamento}")
+    fun deletarFormaPagamento(@PathVariable idFormaPagamento: Long): ResponseEntity<FormaPagamento> {
+        return formaPagamentoService.deletarFormaPagamento(idFormaPagamento)
+    }
+
+    @PutMapping("/{idFormaPagamento}")
+    fun atualizarFormaPagamento(@RequestBody formaPagamento: FormaPagamentoDto, @PathVariable idFormaPagamento: Long): ResponseEntity<FormaPagamento> {
+        return formaPagamentoService.atualizarFormaPagamento(formaPagamento, idFormaPagamento)
+    }
 }

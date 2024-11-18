@@ -24,4 +24,23 @@ class FormaPagamentoService(private val formaPagamentoRepository: FormaPagamento
             ResponseEntity.notFound().build()
         }
     }
+
+    fun deletarFormaPagamento(idFormaPagamento: Long): ResponseEntity<FormaPagamento> {
+        return try {
+            val formaPagamento = formaPagamentoRepository.findById(idFormaPagamento).get()
+            formaPagamentoRepository.delete(formaPagamento)
+            ResponseEntity.ok(formaPagamento)
+        } catch (e: Exception) {
+            ResponseEntity.badRequest().build()
+        }
+    }
+
+    fun atualizarFormaPagamento(dto: FormaPagamentoDto, idFormaPagamento: Long): ResponseEntity<FormaPagamento> {
+        return try {
+            val formaPagamento = formaPagamentoRepository.save(dto.updateFormaPagamento(formaPagamentoRepository.findById(idFormaPagamento).get()))
+            ResponseEntity.ok(formaPagamento)
+        } catch (e: Exception) {
+            ResponseEntity.badRequest().build()
+        }
+    }
 }

@@ -19,4 +19,14 @@ class CategoriaController(private val categoriaService: CategoriaService) {
     fun obterCategorias(): ResponseEntity<List<Categoria>> {
         return categoriaService.listarCategorias()
     }
+
+    @DeleteMapping("/{id}")
+    fun deletarCategoria(@PathVariable id: Long): ResponseEntity<Categoria> {
+        return categoriaService.deletarCategoria(id)
+    }
+
+    @PutMapping("/{id}")
+    fun atualizarCategoria(@RequestBody categoria: CategoriaDto, @PathVariable id: Long): ResponseEntity<Categoria> {
+        return categoriaService.atualizarCategoria(categoria, id)
+    }
 }

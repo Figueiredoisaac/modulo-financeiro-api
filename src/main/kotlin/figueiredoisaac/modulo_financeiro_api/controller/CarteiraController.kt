@@ -14,4 +14,19 @@ class CarteiraController(private val carteiraService: CarteiraService) {
     fun criarCarteira(@RequestBody carteira: CarteiraDto): ResponseEntity<Carteira> {
         return carteiraService.salvarCarteira(carteira)
     }
+
+    @GetMapping
+    fun obterCarteiras(): ResponseEntity<List<Carteira>> {
+        return carteiraService.listarCarteiras()
+    }
+
+    @DeleteMapping("/{idCarteira}")
+    fun deletarCarteira(@PathVariable idCarteira: Long): ResponseEntity<Carteira> {
+        return carteiraService.deletarCarteira(idCarteira)
+    }
+
+    @PutMapping("/{idCarteira}")
+    fun atualizarCarteira(@PathVariable idCarteira: Long, @RequestBody carteira: CarteiraDto): ResponseEntity<Carteira> {
+        return carteiraService.atualizarCarteira(carteira, idCarteira)
+    }
 }

@@ -13,4 +13,12 @@ class FormaPagamentoDto(
             dataAtualizada = LocalDateTime.now()
         )
     }
+
+    fun updateFormaPagamento( formaPagamento:FormaPagamento ) : FormaPagamento {
+        return FormaPagamento(
+            nomeFormaPagamento = this.nomeFormaPagamento,
+            dataCriada = formaPagamento.dataCriada,
+            dataAtualizada = LocalDateTime.now()
+        )
+    }
 }

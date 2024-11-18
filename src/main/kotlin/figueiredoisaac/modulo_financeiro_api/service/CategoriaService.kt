@@ -25,4 +25,25 @@ class CategoriaService(private val categoriaRepository: CategoriaRepository) {
             ResponseEntity.notFound().build()
         }
     }
+
+    fun deletarCategoria(idCategoria: Long): ResponseEntity<Categoria> {
+        return try {
+            val categoria = categoriaRepository.findById(idCategoria).get()
+            categoriaRepository.delete(categoria)
+            ResponseEntity.ok(categoria)
+        } catch (e: Exception) {
+            ResponseEntity.badRequest().build()
+        }
+    }
+
+    fun atualizarCategoria(dto: CategoriaDto, idCategoria: Long): ResponseEntity<Categoria> {
+        return try {
+            val categoria = categoriaRepository.save(
+                dto.updateCategoria(categoriaRepository.findById(idCategoria).get())
+            )
+            ResponseEntity.ok(categoria)
+        } catch (e: Exception) {
+            ResponseEntity.badRequest().build()
+        }
+    }
 }

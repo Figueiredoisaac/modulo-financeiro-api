@@ -1,5 +1,6 @@
 package figueiredoisaac.modulo_financeiro_api.model
 
+import figueiredoisaac.modulo_financeiro_api.common.TipoTransacao
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
@@ -14,7 +15,7 @@ data class Transacao(
     val nomeTransacao: String,
 
     @Column(name = "cd_tipo_transacao")
-    val codigoTipoTransacao: String,
+    val codigoTipoTransacao: TipoTransacao,
 
     @Column(name = "vr_parcela")
     val valorParcela: Double,

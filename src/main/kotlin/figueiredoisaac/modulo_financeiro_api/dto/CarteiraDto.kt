@@ -15,4 +15,13 @@ class CarteiraDto(
             dataAtualizada = LocalDateTime.now()
         )
     }
+
+    fun updateCarteira( carteira:Carteira ) : Carteira {
+        return Carteira(
+            nomeCarteira = this.nomeCarteira?:carteira.nomeCarteira,
+            nomeInstituicao = this.nomeInstituicao?:carteira.nomeInstituicao,
+            dataCriada = carteira.dataCriada,
+            dataAtualizada = LocalDateTime.now()
+        )
+    }
 }

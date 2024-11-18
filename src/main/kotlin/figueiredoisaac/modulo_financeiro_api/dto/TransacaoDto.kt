@@ -1,5 +1,6 @@
 package figueiredoisaac.modulo_financeiro_api.dto
 
+import figueiredoisaac.modulo_financeiro_api.common.TipoTransacao
 import figueiredoisaac.modulo_financeiro_api.model.Categoria
 import figueiredoisaac.modulo_financeiro_api.model.FormaPagamento
 import figueiredoisaac.modulo_financeiro_api.model.Transacao
@@ -11,7 +12,7 @@ import java.time.LocalTime
 
 class TransacaoDto(
     private val nomeTransacao: String,
-    private val codigoTipoTransacao: String,
+    private val codigoTipoTransacao: Long,
     private val valorParcela: Double,
     private val numeroParcelaTotal: Long,
     private val numeroParcelaAtual: Long,
@@ -23,19 +24,17 @@ class TransacaoDto(
 ) {
     fun toTransacao(formaPagamentoRepository: FormaPagamentoRepository, categoriaRepository: CategoriaRepository): Transacao {
 
-        val formaPagamento = formaPagamentoRepository.findById(idFormaPagamento)
-            .orElseThrow { IllegalArgumentException("Forma de Pagamento não encontrada") }
-        val categoria = categoriaRepository.findById(idCategoria)
-            .orElseThrow { IllegalArgumentException("Categoria não encontrada") }
-
         return Transacao(
             nomeTransacao = nomeTransacao,
-            codigoTipoTransacao = codigoTipoTransacao,
+            codigoTipoTransacao = TipoTransacao.entries.find { it.codigo == codigoTipoTransacao }
+                ?: throw IllegalArgumentException("Tipo de Transação não encontrado"),
             valorParcela = valorParcela,
             numeroParcelaTotal = numeroParcelaTotal,
             numeroParcelaAtual = numeroParcelaAtual,
-            formaPagamento = formaPagamento,
-            categoria = categoria,
+            formaPagamento = formaPagamentoRepository.findById(idFormaPagamento)
+                .orElseThrow { IllegalArgumentException("Forma de Pagamento não encontrada") },
+            categoria = categoriaRepository.findById(idCategoria)
+                .orElseThrow { IllegalArgumentException("Categoria não encontrada") },
             dataCriada = LocalDateTime.now(),
             dataAtualizada = LocalDateTime.now(),
             dataPrevista = dataPrevista.atStartOfDay(),
