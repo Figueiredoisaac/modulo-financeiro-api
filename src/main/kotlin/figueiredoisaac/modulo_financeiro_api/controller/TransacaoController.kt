@@ -19,4 +19,9 @@ class TransacaoController(private val transacaoService: TransacaoService) {
     fun obterTransacoes(): ResponseEntity<List<Transacao>> {
         return transacaoService.listarTransacoes()
     }
+
+    @GetMapping("/{idCartao}")
+    fun obterTransacaoPorCartao(@PathVariable idCartao: Long): ResponseEntity<List<Transacao>> {
+        return transacaoService.obterTransacaoPorCartao(idCartao)
+    }
 }

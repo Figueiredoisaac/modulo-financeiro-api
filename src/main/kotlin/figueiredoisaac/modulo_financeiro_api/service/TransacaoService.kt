@@ -43,4 +43,12 @@ class TransacaoService(
             ResponseEntity.notFound().build()
         }
     }
+
+    fun obterTransacaoPorCartao(idCartao: Long): ResponseEntity<List<Transacao>> {
+        return try {
+            ResponseEntity.ok(transacaoRepository.findByIdCartao(idCartao))
+        } catch (e: Exception) {
+            ResponseEntity.notFound().build()
+        }
+    }
 }
