@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*
 class CategoriaController(private val categoriaService: CategoriaService) {
 
     @PostMapping
-    fun criarCategoria(@RequestBody categoria: CategoriaDto): ResponseEntity<Categoria> {
-        return categoriaService.salvarCategoria(categoria)
+    fun criarCategoria(@RequestBody categoriaDto: CategoriaDto): ResponseEntity<Categoria> {
+        return categoriaService.salvarCategoria(categoriaDto)
     }
 
     @GetMapping

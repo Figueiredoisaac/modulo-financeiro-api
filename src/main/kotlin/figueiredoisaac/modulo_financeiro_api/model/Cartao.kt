@@ -19,6 +19,10 @@ data class Cartao(
     @Column(name = "dt_vencimento")
     val dataVencimento: LocalDateTime,
 
+    @ManyToOne
+    @JoinColumn(name = "id_carteira")
+    val idCarteira: Carteira,
+
     @Column(name = "dt_fechamento")
     val dataFechamento: LocalDateTime,
 

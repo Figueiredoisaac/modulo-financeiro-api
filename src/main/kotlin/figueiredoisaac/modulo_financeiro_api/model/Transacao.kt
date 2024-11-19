@@ -34,6 +34,14 @@ data class Transacao(
     @JoinColumn(name = "id_categoria")
     val categoria: Categoria,
 
+    @ManyToOne
+    @JoinColumn(name = "id_carteira")
+    val carteira: Carteira?,
+
+    @ManyToOne
+    @JoinColumn(name = "id_cartao")
+    val cartao: Cartao?,
+
     @Column(name = "dt_criada")
     val dataCriada: LocalDateTime,
 

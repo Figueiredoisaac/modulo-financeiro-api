@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service
 @Service
 class CategoriaService(private val categoriaRepository: CategoriaRepository) {
 
-    fun salvarCategoria(categoria: CategoriaDto): ResponseEntity<Categoria> {
+    fun salvarCategoria(categoriaDto: CategoriaDto): ResponseEntity<Categoria> {
         return try {
-            ResponseEntity.ok(categoriaRepository.save(categoria.toCategoria()))
+            ResponseEntity.ok(categoriaRepository.save(categoriaDto.toCategoria()))
         } catch (e: Exception) {
             ResponseEntity.badRequest().build()
         }
