@@ -15,7 +15,7 @@ class CartaoDto(
     fun toCartao(carteira:Carteira) = Cartao(
         nomeInstituicao = nomeInstituicao!!,
         valorLimite = valorLimite!!,
-        idCarteira = carteira,
+        carteira = carteira,
         dataVencimento = dataVencimento!!.atStartOfDay(),
         dataFechamento = dataFechamento!!.atStartOfDay(),
         dataAtualizada = LocalDateTime.now(),
@@ -25,7 +25,7 @@ class CartaoDto(
     fun updateCartao( cartao:Cartao, carteira:Carteira ) = Cartao(
         nomeInstituicao = this.nomeInstituicao?:cartao.nomeInstituicao,
         valorLimite = this.valorLimite?:cartao.valorLimite,
-        idCarteira = carteira,
+        carteira = carteira,
         dataVencimento = this.dataVencimento?.atStartOfDay()?:cartao.dataVencimento,
         dataFechamento = this.dataFechamento?.atStartOfDay()?:cartao.dataFechamento,
         dataAtualizada = LocalDateTime.now(),

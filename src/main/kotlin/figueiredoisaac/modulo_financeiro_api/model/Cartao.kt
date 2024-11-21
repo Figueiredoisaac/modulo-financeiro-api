@@ -21,7 +21,7 @@ data class Cartao(
 
     @ManyToOne
     @JoinColumn(name = "id_carteira")
-    val idCarteira: Carteira,
+    val carteira: Carteira,
 
     @Column(name = "dt_fechamento")
     val dataFechamento: LocalDateTime,
